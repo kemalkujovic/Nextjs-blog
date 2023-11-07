@@ -15,11 +15,13 @@ async function handler(req, res) {
       name,
       message,
     };
+
     let client;
+
+    const connectionString = `mongodb+srv://${process.env.mongodb_username}:${process.env.mongodb_password}@${process.env.mongodb_clustername}.1kg7fdz.mongodb.net/${process.env.mongodb_database}?retryWrites=true&w=majority`;
+
     try {
-      client = await MongoClient.connect(
-        "mongodb+srv://kemalkujovic1111:7UYnSjS2DPn5nB2I@cluster0.1kg7fdz.mongodb.net/my-site?retryWrites=true&w=majority"
-      );
+      client = await MongoClient.connect(connectionString);
     } catch (error) {
       res.status(500).json({ meessage: "Failed to connect to atabase." });
       return;
